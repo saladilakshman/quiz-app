@@ -33,6 +33,7 @@ const Instructiondialog = () => {
   const startQuiz = () => {
     dispatch({ type: "show-instructions-dialog" });
     navigate("/quiz");
+    dispatch({ type: "fetching" });
     const categoryvalue = Categories.find((ctr) => ctr.category === category);
     axios
       .get(
@@ -49,7 +50,7 @@ const Instructiondialog = () => {
         }));
         dispatch({ type: "sucess-data-fetch", payload: args });
       })
-      .catch((err) => console.log(err.message));
+      .catch(() => dispatch({ type: "error-data-fetch" }));
   };
   return (
     <Dialog

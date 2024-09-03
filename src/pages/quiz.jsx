@@ -35,7 +35,6 @@ const Quiz = () => {
   } = styles;
   const navigate = useNavigate();
   const textref = useRef();
-  const { question, correct_answer, incorrect_answers } = results[index];
   const handleChoiceChange = (e) => {
     dispatch({ type: "option-selection", payload: e.target });
     dispatch({ type: "score", payload: index });
@@ -142,12 +141,12 @@ const Quiz = () => {
               </Button>
             </Stack>
             <div>
-              <Typography variant="h6">{question}</Typography>
+              <Typography variant="h6">{results[index]?.question}</Typography>
               <RadioGroup
                 value={choices[index] || ""}
                 onChange={handleChoiceChange}
               >
-                {[correct_answer, ...incorrect_answers].map((item, idx) => {
+                {results[index]?.choices?.map((item, idx) => {
                   return (
                     <FormControlLabel
                       key={idx}
